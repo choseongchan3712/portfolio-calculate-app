@@ -8,3 +8,4 @@
 [] helmet-async
 [x] npm install mathjs
 [x] npm install react-bootstrap bootstrap
+[x] npm i axios
