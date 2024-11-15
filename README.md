@@ -7,3 +7,4 @@
 [] npm i react-hook-form
 [] helmet-async
 [x] npm install mathjs
+[x] npm install react-bootstrap bootstrap
