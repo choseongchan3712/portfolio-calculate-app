@@ -41,7 +41,7 @@ const Header = ():JSX.Element => {
         <Link to={"/exchange"}>환율계산기</Link>
       </Menu>
       <Menu>
-        <Link to={"/"}>날짜계산기</Link>
+        <Link to={"/date"}>날짜계산기</Link>
       </Menu>
       <Menu>
         <Link to={"/"}>시급계산기</Link>
