@@ -7,9 +7,11 @@ import Day from "./pages/date-pages/Day";
 import Week from "./pages/date-pages/Week";
 import Month from "./pages/date-pages/Month";
 import DDay from "./pages/date-pages/DDay";
+import DateProvider from "./pages/date-pages/date-components/DateProvider";
 
 const Router = (): JSX.Element => {
   return (
+    <DateProvider>
     <HashRouter>
       <Header />
       <Routes>
@@ -23,6 +25,7 @@ const Router = (): JSX.Element => {
         </Route>
       </Routes>
     </HashRouter>
+    </DateProvider>
   );
 };
 

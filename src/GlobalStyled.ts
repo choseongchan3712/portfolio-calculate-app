@@ -1,6 +1,15 @@
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
+
+interface ColorStyleType {
+  pointColor: string;
+}
+
+export const colorStyle:ColorStyleType = {
+  pointColor: "#ff9f0a",
+}
+
 export const GlobalStyled = createGlobalStyle`
 ${reset}
 
