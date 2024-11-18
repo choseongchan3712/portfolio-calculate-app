@@ -4,10 +4,14 @@ import reset from "styled-reset";
 
 interface ColorStyleType {
   pointColor: string;
+  bgColor: string;
+  borderColor: string;
 }
 
 export const colorStyle:ColorStyleType = {
   pointColor: "#ff9f0a",
+  bgColor: "#ffefd7",
+  borderColor: "#ffce84",
 }
 
 export const GlobalStyled = createGlobalStyle`
