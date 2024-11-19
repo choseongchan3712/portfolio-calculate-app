@@ -95,12 +95,12 @@ const DayWrap = styled.div`
         justify-content: space-between;
         width: 48%;
         .days_contents {
-          width: 80%;
+          width: 82%;
           display: flex;
           align-items: center;
           justify-content: space-between;
           form {
-            width: 100%;
+            width: 89%;
             display: flex;
             align-items: center;
             input {
@@ -121,6 +121,10 @@ const DayWrap = styled.div`
           }
           div {
             font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            min-width: 50px;
           }
         }
 

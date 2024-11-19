@@ -26,7 +26,7 @@ const Week = (): JSX.Element => {
         return result;
       } else if (
         moment(date).diff(moment(), "days") + 1 > 7 &&
-        (moment(date).diff(moment(), "days") + 1) % 7 !== 7
+        (moment(date).diff(moment(), "days") + 1) % 7 !== 0
       ) {
         const result: string = `${moment(date)
           .add(1, "days")
@@ -48,7 +48,7 @@ const Week = (): JSX.Element => {
         return result;
       } else if (
         moment().add(1, "days").diff(moment(date), "days") > 7 &&
-        moment().add(1, "days").diff(moment(date), "days") % 7 !== 7
+        moment().add(1, "days").diff(moment(date), "days") % 7 !== 0
       ) {
         const result: string = `${moment()
           .add(1, "days")
@@ -80,7 +80,7 @@ const Week = (): JSX.Element => {
         return result;
       } else if (
         moment(date).diff(moment(secValue), "days") > 7 &&
-        moment(date).diff(moment(secValue), "days") % 7 !== 7
+        moment(date).diff(moment(secValue), "days") % 7 !== 0
       ) {
         const result: string = `${moment(date).diff(
           moment(secValue),
@@ -104,7 +104,7 @@ const Week = (): JSX.Element => {
         return result;
       } else if (
         moment(secValue).add(1, "days").diff(moment(date), "days") > 7 &&
-        moment(secValue).add(1, "days").diff(moment(date), "days") % 7 !== 7
+        moment(secValue).add(1, "days").diff(moment(date), "days") % 7 !== 0
       ) {
         const result: string = `${moment(secValue)
           .add(1, "days")
@@ -119,7 +119,7 @@ const Week = (): JSX.Element => {
         return result;
       }
     } else {
-      const result: string = `1일째 날`;
+      const result: string = `0 주 1일째 날`;
       return result;
     }
   };
