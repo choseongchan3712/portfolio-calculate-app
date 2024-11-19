@@ -3,11 +3,12 @@ import DateBody from "./date-components/DateBody";
 import { DateContext } from "./date-components/DateContext";
 import moment from "moment";
 import {
-  AfterContext,
+  // AfterContext,
   BeforeContext,
   CountContext,
   SecContext,
 } from "./date-components/ValueContext";
+import 'moment/locale/ko';
 
 const Day = (): JSX.Element => {
   moment.locale("ko");
@@ -15,12 +16,8 @@ const Day = (): JSX.Element => {
   const { date } = useContext(DateContext)!;
   const { secValue } = useContext(SecContext)!;
   const { before } = useContext(BeforeContext)!;
-  const { after } = useContext(AfterContext)!;
+  // const { after } = useContext(AfterContext)!;
   const { count } = useContext(CountContext)!;
-
-  console.log(before);
-  console.log(after);
-  console.log(count);
 
   const firstCalculating = (value: string): string => {
     if (moment(value).startOf("day").isAfter(moment().startOf("day"))) {
@@ -81,6 +78,7 @@ const Day = (): JSX.Element => {
       firstCal={firstCalString}
       secCal={secondCalString}
       countedDate={countingDate}
+      whatUnit="일"
     />
   );
 };

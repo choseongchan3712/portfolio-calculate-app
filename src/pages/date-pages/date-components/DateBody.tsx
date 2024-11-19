@@ -182,9 +182,10 @@ interface DateType {
   firstCal: string;
   secCal: string;
   countedDate: string;
+  whatUnit:string;
 }
 
-const DateBody = ({setedDate, firstCal, secCal, countedDate}:DateType): JSX.Element => {
+const DateBody = ({setedDate, firstCal, secCal, countedDate, whatUnit}:DateType): JSX.Element => {
   moment.locale('ko');
   const {secValue, setSecValue} = useContext(SecContext)!;
   const {before, setBefore} = useContext(BeforeContext)!;
@@ -251,7 +252,7 @@ const DateBody = ({setedDate, firstCal, secCal, countedDate}:DateType): JSX.Elem
                 <form>
                   <input type="number" onChange={countHandler} value={count}/>
                 </form>
-                <div>일</div>
+                <div>{whatUnit}</div>
               </div>
               <div className="button">
                 <div className={before} onClick={beforeHandler}>전</div>
