@@ -14,6 +14,7 @@ import {
   CountProvider,
   SecProvider,
 } from "./pages/date-pages/date-components/ValueProvider";
+import Wage from "./pages/Wage";
 
 const Router = (): JSX.Element => {
   return (
@@ -33,6 +34,7 @@ const Router = (): JSX.Element => {
                     <Route path="month" element={<Month />} />
                     <Route path="d-day" element={<DDay />} />
                   </Route>
+                  <Route path="/wage" element={<Wage />}/>
                 </Routes>
               </HashRouter>
             </CountProvider>

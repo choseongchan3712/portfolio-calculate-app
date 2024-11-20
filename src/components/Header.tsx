@@ -44,7 +44,7 @@ const Header = ():JSX.Element => {
         <Link to={"/date"}>날짜계산기</Link>
       </Menu>
       <Menu>
-        <Link to={"/"}>시급계산기</Link>
+        <Link to={"/wage"}>임금계산기</Link>
       </Menu>
 
 
