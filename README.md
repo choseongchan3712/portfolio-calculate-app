@@ -55,16 +55,29 @@
   (ㄱ) onSubmit, onReset => FormEvent <br />
   (ㄴ) onChange => ChangeEvent <br />
   (ㄷ) onFocus, onBlur => FocusEvent <br />
-  (ㄹ) onClick, onDoubleClick, onMouseMove, onMouseEnter, onMouseLeave, onMouseDown, onMouseUp => MouseEvent <br />
-  (ㅁ) onKeyDown, onKeyPress, onKeyUp => KeyboardEvent <br />
-  (ㅂ) onScroll => UIEvent <br />
-  (ㅅ) onWheel => WheelEvent <br />
-  (ㅇ) onCompositionStart, onCompositionUpdate, onCompositionEnd(입력기를 통해 스트가 조합될 때 발생하는 이벤트) => CompositionEvent <br />
-  (ㅈ) onDrag, onDragStart, onDragEnd, onDragEnter, onDragLeave, onDragOver, onDrop => DragEvent <br />
-  (ㅊ) onInvalid(폼이 유효하지 않을 때 발생하는 이벤트) => InvalidEvent <br />
-  (ㅋ) onPlay, onPause, onVolumeChange, onTimeUpdate, onEnded, onLoadedData, onLoadedMetadata, onLoadStart, onSeeking, onSeeked, onWaiting, onStalled, onSuspend => MediaEvent <br />
-  (ㅌ) onLoad, onError => SyntheticEvent <br />
-  (ㅍ) onTouchStart, onTouchMove, onTouchEnd, onTouchCancel => TouchEvent <br />
-  (ㅎ) onAnimationStart, onAnimationEnd, onAnimationIteration => <br />
-  (a) onTouchStart, onTouchMove, onTouchEnd, onTouchCancel => AnimationEvent <br />
-  (b) onTransitionEnd => TransitionEvent <br />
+  (2) 마우스 이벤트 <br />
+  onClick, onDoubleClick, onMouseMove, onMouseEnter, onMouseLeave, onMouseDown, onMouseUp => MouseEvent <br />
+  (2) 키보드 이벤트 <br />
+  onKeyDown, onKeyPress, onKeyUp => KeyboardEvent <br />
+  (3) UI 이벤트 <br />
+  onScroll => UIEvent <br />
+  (4) Wheel 이벤트 <br />
+  onWheel => WheelEvent <br />
+  (5) 컴포지션 이벤트 <br />
+  onCompositionStart, onCompositionUpdate, onCompositionEnd(입력기를 통해 스트가 조합될 때 발생하는 이벤트) => CompositionEvent <br />
+  (6) 드래그 이벤트 <br />
+  onDrag, onDragStart, onDragEnd, onDragEnter, onDragLeave, onDragOver, onDrop => DragEvent <br />
+  (7) 폼 관련 추가 이벤트 <br />
+  onInvalid(폼이 유효하지 않을 때 발생하는 이벤트) => InvalidEvent <br />
+  (8) 미디어 이벤트 <br />
+  onPlay, onPause, onVolumeChange, onTimeUpdate, onEnded, onLoadedData, onLoadedMetadata, onLoadStart, onSeeking, onSeeked, onWaiting, onStalled, onSuspend => MediaEvent <br />
+  (9) 이미지 이벤트 <br />
+  onLoad, onError => SyntheticEvent <br />
+  (10) 터치 이벤트 <br />
+  onTouchStart, onTouchMove, onTouchEnd, onTouchCancel => TouchEvent <br />
+  (11) 애니메이션 이벤트 <br />
+  onAnimationStart, onAnimationEnd, onAnimationIteration => AnimationEvent<br />
+  (12) 트랜지션 이벤트 <br />
+  onTransitionEnd => TransitionEvent <br />
+  (13) 포인터 이벤트 <br />
+  onPointerDown, onPointerUp, onPointerMove, onPointerEnter, onPointerLeave, onPointerOver, onPointerOut, onPointerCancel => PointerEvent <br />
