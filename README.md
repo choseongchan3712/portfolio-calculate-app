@@ -1,11 +1,10 @@
 # 1. 설치항목
 
 - [x] npm i react-router-dom
-- [] npm install node-fetch@2
 - [x] npm i styled-components
 - [x] npm i styled-reset
 - [] font-awesome
-- [] npm i react-hook-form
+- [X] npm i react-hook-form
 - [] helmet-async
 - [x] npm install mathjs
 - [x] npm install react-bootstrap bootstrap
@@ -82,7 +81,7 @@
 <br />
 
 ### (2) 날짜계산기를 만들때 시간간의 계산이 너무 복잡했음.
-#### 해결방버: Moment.js라는 라이브러리를 서칭해서 보다 편리하게 시간을 계산함.
+#### 해결방법: Moment.js라는 라이브러리를 서칭해서 보다 편리하게 시간을 계산함.
 <br /><br />
 
 # 8. 팁
