@@ -91,7 +91,7 @@ const Calculate = (): JSX.Element => {
     } else if (value === "x³") {
       setInput((prev) => Math.pow(parseFloat(prev), 3).toString());
     } else if (value === "xʸ") {
-      setInput((prev) => prev + "^");
+      setInput((prev) => prev + "**");
     } else if (value === "eˣ") {
       setInput((prev) => Math.exp(parseFloat(prev)).toString());
     } else if (value === "10ˣ") {
@@ -181,7 +181,7 @@ export default Calculate;
 //! parseFloat(): 문자열에 숫자가 포함되어 있을 경우 해당 숫자 값을 소수점까지 포함하여 변환할 수 있음. 사용자로부터 string값을 number로 변환하여 계산할 때 유용하게 사용함.
 //? 예: parseFloat("123.45") => 123.45; parseFloat("123abc") => 123
 
-//! startswith(): 문자열이 특정 문자나 문자열로 시작하는지를 확인하는데 사용됨. 반환값은 boolean
+//! startsWith(): 문자열이 특정 문자나 문자열로 시작하는지를 확인하는데 사용됨. 반환값은 boolean
 //? 예: string.startsWith(searchString, position): searchString => 문자열의 시작 부분에서 찾고자 하는 문자나 문자열을 지정함; position (선택 사항) => 검사할 시작 위치를 지정하며, 기본값은 0임
 
 //! eval & evaluate:
