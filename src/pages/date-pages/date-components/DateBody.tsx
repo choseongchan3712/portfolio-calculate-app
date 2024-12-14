@@ -9,8 +9,10 @@ import { DateContext } from "./DateContext";
 const Container = styled.div`
   position: relative;
   z-index: 1;
-  width: 100%;
-  padding: 20px;
+  width: 80%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0;
   background-color: #fff;
   border-radius: 0 0 20px 20px;
   display: flex;
@@ -20,16 +22,18 @@ const Container = styled.div`
 `;
 
 const DayWrap = styled.div`
-  width: 80%;
-  max-width: 800px;
-  padding: 30px;
-  color: #000;
+  width: 100%;
+  padding: 20px;
+  color: #333;
   
   .today_wrap {
-    padding: 20px 10px 40px 10px;
+    padding: 15px;
     text-align: center;
     font-size: 24px;
     line-height: 36px;
+    background-color: #f7f7f9;
+    border-radius: 10px;
+    margin-bottom: 20px;
     span {
       color: ${colorStyle.pointColor};
       font-weight: 500;
@@ -39,15 +43,16 @@ const DayWrap = styled.div`
   .calculate_wrap {
     width: 100%;
     padding: 20px;
-    background-color: #f8f9fa;
+    background-color: #f7f7f9;
     border-radius: 10px;
 
     .what_days {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 15px 15px 20px 0;
+      padding: 15px;
       border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      margin-bottom: 15px;
       
       .date {
         display: flex;
@@ -62,19 +67,19 @@ const DayWrap = styled.div`
             position: relative;
             height: 50px;
             width: 100%;
-            color: #000;
+            color: #333;
             font-size: 16px;
-            background-color: #f7f7f9;
+            background-color: #fff;
             padding: 0 15px;
             border-radius: 10px;
             transition: all 0.3s ease;
             
             &:hover {
-              background-color: #f0f0f2;
+              background-color: #f8f9fa;
             }
             
             &:focus {
-              box-shadow: 0 0 0 2px ${colorStyle.pointColor}40;
+              border: 1px solid ${colorStyle.pointColor};
             }
 
             &::-webkit-calendar-picker-indicator {
@@ -110,11 +115,12 @@ const DayWrap = styled.div`
 
     .what_date {
       width: 100%;
-      padding: 20px 15px 20px 0;
+      padding: 15px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      margin-bottom: 15px;
       
       .days {
         display: flex;
@@ -137,20 +143,20 @@ const DayWrap = styled.div`
               all: unset;
               height: 50px;
               width: 100%;
-              color: #000;
+              color: #333;
               font-size: 16px;
-              background-color: #f7f7f9;
+              background-color: #fff;
               padding: 0 15px;
               border-radius: 10px;
               text-align: right;
               transition: all 0.3s ease;
               
               &:hover {
-                background-color: #f0f0f2;
+                background-color: #f8f9fa;
               }
               
               &:focus {
-                box-shadow: 0 0 0 2px ${colorStyle.pointColor}40;
+                border: 1px solid ${colorStyle.pointColor};
               }
 
               &::-webkit-outer-spin-button,
@@ -184,14 +190,14 @@ const DayWrap = styled.div`
             font-size: 16px;
             color: #333;
             cursor: pointer;
-            background-color: #f7f7f9;
+            background-color: #fff;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
             
             &:hover {
-              background-color: #f0f0f2;
+              background-color: #f8f9fa;
             }
           }
           
@@ -201,7 +207,6 @@ const DayWrap = styled.div`
           
           .before.active {
             color: ${colorStyle.pointColor};
-            background-color: ${colorStyle.bgColor};
             font-weight: 500;
           }
           
@@ -211,7 +216,6 @@ const DayWrap = styled.div`
           
           .after.active {
             color: ${colorStyle.pointColor};
-            background-color: ${colorStyle.bgColor};
             font-weight: 500;
           }
         }
@@ -235,14 +239,14 @@ const DayWrap = styled.div`
     align-items: center;
     justify-content: center;
     border-radius: 10px;
-    background-color: #f7f7f9;
+    background-color: #fff;
     cursor: pointer;
     font-size: 16px;
     color: #333;
     transition: all 0.3s ease;
     
     &:hover {
-      background-color: #f0f0f2;
+      background-color: #f8f9fa;
     }
   }
 `;

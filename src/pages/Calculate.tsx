@@ -4,14 +4,19 @@ import Button from "./calculate-components/Button";
 import Display from "./calculate-components/Display";
 import { useState } from "react";
 import { evaluate } from "mathjs";
+import { colorStyle } from "../GlobalStyled";
 
 const Container = styled.div`
   position: relative;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: calc(100vh - 70px);
-  padding: 50px;
+  z-index: 1;
+  width: 80%;
+  max-width: 800px;
+  margin: 0 auto;
+  margin-top: 200px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(6, 1fr);
@@ -22,14 +27,20 @@ const Container = styled.div`
     "box20 box21 box22 box23 box24 box25 box26 box27 box28 box29"
     "box30 box31 box32 box33 box34 box35 box36 box37 box38 box39"
     "box40 box41 box42 box43 box44 box45 box46 box46 box47 box48";
-  gap: 15px;
+  gap: 10px;
+  
   .box6,
   .box7,
   .box8 {
-    background-color: #a5a5a5;
-    color: black;
-    font-size: 45px;
+    background-color: #f7f7f9;
+    color: #333;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    &:hover {
+      background-color: #f0f0f2;
+    }
   }
+  
   .box16,
   .box17,
   .box18,
@@ -41,29 +52,39 @@ const Container = styled.div`
   .box38,
   .box46,
   .box47 {
-    background-color: #333;
-    font-size: 45px;
+    background-color: #f7f7f9;
+    color: #333;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    &:hover {
+      background-color: #f0f0f2;
+    }
   }
+  
   .box9,
   .box19,
   .box29,
   .box39,
   .box48 {
-    background-color: #ff9f0a;
-    font-size: 45px;
+    background-color: ${colorStyle.pointColor};
+    color: #fff;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    &:hover {
+      opacity: 0.9;
+    }
   }
-`; //! 클래스명 숫자로 시작하면 안 먹음
+`;
 
 const Calculate = (): JSX.Element => {
   const [input, setInput] = useState<string>("");
-  const [result, setResult] = useState<string>("0");
+  const [result, setResult] = useState<string>("");
   const [memory, setMemory] = useState<number>(0);
 
   const clickHandler = (value: string): void => {
     console.log(value);
     if (value === "=") {
       try {
-        //! setResult(eval(input).toString());
         setResult(evaluate(input).toString());
         setInput(evaluate(input).toString());
       } catch (error) {
@@ -75,7 +96,7 @@ const Calculate = (): JSX.Element => {
     } else if (value === "±") {
       setInput((prev) => (prev.startsWith("-") ? prev.slice(1) : "-" + prev));
     } else if (value === "%") {
-      setInput((prev) => (parseFloat(prev) / 100).toString()); //# 여기까지
+      setInput((prev) => (parseFloat(prev) / 100).toString());
     } else if (value === "mc") {
       setMemory(0);
     } else if (value === "m+") {
@@ -144,8 +165,6 @@ const Calculate = (): JSX.Element => {
       }
     }
   };
-
-  // console.log(Math.pow(8, 1 / 3));
 
   const factorial = (n: number): number => {
     if (n === 0) return 1;
