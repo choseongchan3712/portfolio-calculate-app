@@ -7,6 +7,8 @@ import { AfterContext, BeforeContext, CountContext, SecContext } from "./ValueCo
 import { DateContext } from "./DateContext";
 
 const Container = styled.div`
+  position: relative;
+  z-index: 1;
   width: 100%;
   padding: 20px;
   background-color: #fff;
@@ -14,49 +16,67 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 `;
 
 const DayWrap = styled.div`
-  color: black;
-  padding: 10px;
-  width: 100%;
+  width: 80%;
+  max-width: 800px;
+  padding: 30px;
+  color: #000;
+  
   .today_wrap {
-    padding: 20px 10px 50px 10px;
+    padding: 20px 10px 40px 10px;
     text-align: center;
-    font-size: 30px;
-    line-height: 40px;
+    font-size: 24px;
+    line-height: 36px;
     span {
       color: ${colorStyle.pointColor};
+      font-weight: 500;
     }
   }
 
   .calculate_wrap {
     width: 100%;
-    padding: 10px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+
     .what_days {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 10px 10px 20px 0;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+      padding: 15px 15px 20px 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      
       .date {
         display: flex;
         align-items: center;
         justify-content: space-between;
         width: 48%;
+        
         form {
           width: 95%;
           input {
+            all: unset;
             position: relative;
-            outline: none;
-            border: none;
-            height: 100%;
+            height: 50px;
             width: 100%;
             color: #000;
-            font-size: 20px;
-            background-color: #eeeeee;
-            padding: 10px;
-            border-radius: 20px;
+            font-size: 16px;
+            background-color: #f7f7f9;
+            padding: 0 15px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            
+            &:hover {
+              background-color: #f0f0f2;
+            }
+            
+            &:focus {
+              box-shadow: 0 0 0 2px ${colorStyle.pointColor}40;
+            }
+
             &::-webkit-calendar-picker-indicator {
               cursor: pointer;
               position: absolute;
@@ -70,48 +90,69 @@ const DayWrap = styled.div`
         }
 
         div {
-          font-size: 24px;
+          font-size: 16px;
+          color: #333;
+          display: flex;
+          align-items: center;
+          margin-left: 10px;
         }
       }
+      
       .days {
         width: 48%;
-        font-size: 24px;
+        font-size: 16px;
         display: flex;
         justify-content: flex-end;
         color: ${colorStyle.pointColor};
+        font-weight: 500;
       }
     }
 
     .what_date {
       width: 100%;
-      padding: 20px 10px 20px 0;
+      padding: 20px 15px 20px 0;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      
       .days {
         display: flex;
         align-items: center;
         justify-content: space-between;
         width: 48%;
+        
         .days_contents {
           width: 82%;
           display: flex;
           align-items: center;
           justify-content: space-between;
+          
           form {
             width: 89%;
             display: flex;
             align-items: center;
+            
             input {
               all: unset;
-              height: 100%;
+              height: 50px;
               width: 100%;
               color: #000;
-              font-size: 20px;
-              background-color: #eeeeee;
-              padding: 10px;
-              border-radius: 20px;
+              font-size: 16px;
+              background-color: #f7f7f9;
+              padding: 0 15px;
+              border-radius: 10px;
+              text-align: right;
+              transition: all 0.3s ease;
+              
+              &:hover {
+                background-color: #f0f0f2;
+              }
+              
+              &:focus {
+                box-shadow: 0 0 0 2px ${colorStyle.pointColor}40;
+              }
+
               &::-webkit-outer-spin-button,
               &::-webkit-inner-spin-button {
                 -webkit-appearance: none;
@@ -119,50 +160,69 @@ const DayWrap = styled.div`
               }
             }
           }
+          
           div {
-            font-size: 24px;
+            font-size: 16px;
+            color: #333;
             display: flex;
             align-items: center;
             justify-content: flex-start;
             min-width: 50px;
+            margin-left: 10px;
           }
         }
 
         .button {
           display: flex;
           align-items: center;
-          justify-content: space-between;
+          gap: 1px;
+          
           .before,
           .after {
-            padding: 10px;
-            font-size: 24px;
-            color: rgba(0, 0, 0, 0.5);
+            height: 50px;
+            padding: 0 15px;
+            font-size: 16px;
+            color: #333;
             cursor: pointer;
-            border: 1px solid rgba(0, 0, 0, 0.3);
+            background-color: #f7f7f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            
+            &:hover {
+              background-color: #f0f0f2;
+            }
           }
+          
           .before {
             border-radius: 10px 0 0 10px;
-            border-right: none;
           }
-          .before.active{
+          
+          .before.active {
             color: ${colorStyle.pointColor};
             background-color: ${colorStyle.bgColor};
-            border: 1px solid ${colorStyle.borderColor};
+            font-weight: 500;
           }
+          
           .after {
             border-radius: 0 10px 10px 0;
-            border-left: none;
           }
+          
           .after.active {
             color: ${colorStyle.pointColor};
             background-color: ${colorStyle.bgColor};
-            border: 1px solid ${colorStyle.borderColor};
+            font-weight: 500;
           }
         }
       }
 
       .date {
-        font-size: 24px;
+        width: 48%;
+        font-size: 16px;
+        text-align: right;
+        color: ${colorStyle.pointColor};
+        font-weight: 500;
       }
     }
   }
@@ -170,14 +230,20 @@ const DayWrap = styled.div`
   .reset {
     margin-top: 20px;
     width: 100%;
-    padding: 15px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 10px;
-    border: 1px solid rgba(0, 0, 0, 0.3);
+    background-color: #f7f7f9;
     cursor: pointer;
-    font-size: 24px;
+    font-size: 16px;
+    color: #333;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background-color: #f0f0f2;
+    }
   }
 `;
 

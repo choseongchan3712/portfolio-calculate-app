@@ -38,13 +38,181 @@ import styled from "styled-components";
 //? 실수령액 = 총급여액 - 소득세((근로소득금액(총급여(- 비과세액) - 근로소득공제금액 - 기본공제 - 연금보험료공제 - 특별소득공제)*세율) - 근로소득세액공제) - 지방소득세(소득세10%) - (국민연금 + 건강보험 + 장기요양보험 + 고용보험)
 
 const Container = styled.div`
-  width: 70vw;
-  padding: 20px;
-  background-color: #fff;
-  margin: 0 auto;
   position: relative;
-  border-radius: 20px;
+  z-index: 1;
+  width: 100%;
+  height: calc(100vh - 70px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: #000;
+`;
+
+const WageWrapper = styled.div`
+  width: 80%;
+  max-width: 800px;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+`;
+
+const StyledForm = styled.form`
+  .select_wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+
+    select {
+      all: unset;
+      width: 120px;
+      height: 50px;
+      background-color: #f7f7f9;
+      border-radius: 10px;
+      padding: 0 15px;
+      font-size: 16px;
+      color: #000;
+      display: flex;
+      align-items: center;
+    }
+
+    input {
+      all: unset;
+      flex: 1;
+      height: 50px;
+      background-color: #f7f7f9;
+      border-radius: 10px;
+      padding: 0 15px;
+      font-size: 16px;
+      text-align: right;
+    }
+
+    span {
+      font-size: 16px;
+      color: #333;
+    }
+  }
+
+  .family {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+
+    label {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 14px;
+      color: #333;
+
+      input {
+        all: unset;
+        height: 50px;
+        background-color: #f7f7f9;
+        border-radius: 10px;
+        padding: 0 15px;
+        font-size: 16px;
+        text-align: right;
+      }
+    }
+  }
+
+  .non_tax {
+    margin-bottom: 20px;
+
+    label {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 14px;
+      color: #333;
+
+      input {
+        all: unset;
+        width: 100%;
+        height: 50px;
+        background-color: #f7f7f9;
+        border-radius: 10px;
+        padding: 0 15px;
+        font-size: 16px;
+        text-align: right;
+        box-sizing: border-box;
+      }
+    }
+  }
+
+  button {
+    all: unset;
+    width: 100%;
+    height: 50px;
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    box-sizing: border-box;
+    
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+`;
+
+const ResultSection = styled.div`
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+
+  .result {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+
+    select {
+      all: unset;
+      width: 120px;
+      height: 50px;
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 0 15px;
+      font-size: 16px;
+      color: #000;
+      display: flex;
+      align-items: center;
+    }
+
+    span {
+      flex: 1;
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+      text-align: right;
+    }
+  }
+
+  button {
+    all: unset;
+    width: 100%;
+    height: 50px;
+    background-color: #e9ecef;
+    color: #495057;
+    text-align: center;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    box-sizing: border-box;
+    
+    &:hover {
+      background-color: #dee2e6;
+    }
+  }
 `;
 
 const Wage = (): JSX.Element => {
@@ -433,57 +601,61 @@ const Wage = (): JSX.Element => {
 
   return (
     <Container>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="select_wrap">
-          <select {...register("select")}>
-            <option>월급</option>
-            <option>주급</option>
-            <option>연봉</option>
-          </select>
-          <input
-            type="number"
-            {...register("input_value", { required: "입력값은 필수 입니다." })}
-          />
-          <span>원</span>
-        </div>
-        <div className="family">
-          <label>
-            가족 인원수(본인포함)
+      <WageWrapper>
+        <StyledForm onSubmit={handleSubmit(onSubmit)}>
+          <div className="select_wrap">
+            <select {...register("select")}>
+              <option>월급</option>
+              <option>주급</option>
+              <option>연봉</option>
+            </select>
             <input
               type="number"
-              {...register("fam_num", {
-                required: "가족인원수는 필수 입니다.",
-              })}
+              {...register("input_value", { required: "입력값은 필수 입니다." })}
             />
-          </label>
-          <label>
-            미성년자 자녀 수
-            <input
-              type="number"
-              {...register("child_num", { required: "자녀수는 필수 입니다." })}
-            />
-          </label>
-        </div>
-        <div className="non_tax">
-          <label>
-            비과세액{" "}
-            <input
-              type="number"
-              {...register("non_tax", { required: "비과세액은 필수 입니다." })}
-            />
-          </label>
-        </div>
-        <button>입력하기</button>
-      </form>
-      <div className="result">
-        <select ref={selectRef} onChange={selectHandler}>
-          <option>월급</option>
-          <option>주급</option>
-          <option>연봉</option>
-        </select>
-        <span>예상 실 수령액: {result}원</span>
-      </div>
-      <button onClick={clickHandler}>초기화</button>
+            <span>원</span>
+          </div>
+          <div className="family">
+            <label>
+              가족 인원수(본인포함)
+              <input
+                type="number"
+                {...register("fam_num", {
+                  required: "가족인원수는 필수 입니다.",
+                })}
+              />
+            </label>
+            <label>
+              미성년자 자녀 수
+              <input
+                type="number"
+                {...register("child_num", { required: "자녀수는 필수 입니다." })}
+              />
+            </label>
+          </div>
+          <div className="non_tax">
+            <label>
+              비과세액{" "}
+              <input
+                type="number"
+                {...register("non_tax", { required: "비과세액은 필수 입니다." })}
+              />
+            </label>
+          </div>
+          <button>입력하기</button>
+        </StyledForm>
+        <ResultSection>
+          <div className="result">
+            <select ref={selectRef} onChange={selectHandler}>
+              <option>월급</option>
+              <option>주급</option>
+              <option>연봉</option>
+            </select>
+            <span>예상 실 수령액: {result}원</span>
+          </div>
+          <button onClick={clickHandler}>초기화</button>
+        </ResultSection>
+      </WageWrapper>
     </Container>
   );
 };

@@ -1,29 +1,35 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { getExchangeRates } from "../api";
+import { colorStyle } from "../GlobalStyled";
 
 const Container = styled.div`
   position: relative;
   z-index: 1;
-  width: 100%;
-  height: calc(100vh - 70px);
-  top: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const Contents = styled.div`
-  position: relative;
+  width: 80%;
+  max-width: 800px;
+  padding: 20px;
+  background-color: #f7f7f9;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  margin-top: 200px;
+`;
+
+const Contents = styled.div`
   width: 100%;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
+
 const Before = styled.form`
-  width: 80%;
-  height: 5vw;
+  width: 100%;
+  height: 50px;
   margin-bottom: 20px;
   display: flex;
   select {
@@ -31,31 +37,48 @@ const Before = styled.form`
     height: 100%;
     width: 30%;
     background-color: #f7f7f9;
-    border-right: 1px solid rgba(0, 0, 0, 0.3);
-    color: black;
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    color: #333;
     display: flex;
     align-items: center;
     padding-left: 20px;
     box-sizing: border-box;
-    font-size: 30px;
-    font-weight: 900;
-    border-radius: 20px 0 0 20px;
-    line-height: 105%;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 10px 0 0 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background-color: #f0f0f2;
+    }
+    
     option {
       font-size: 16px;
+      background-color: #fff;
     }
   }
   input {
     all: unset;
     width: 60%;
     height: 100%;
-    background-color: #fff;
-    color: black;
-    font-size: 40px;
-    font-weight: 900;
+    background-color: #f7f7f9;
+    color: #333;
+    font-size: 16px;
+    font-weight: 500;
     text-align: end;
     box-sizing: border-box;
-    padding-right: 10px;
+    padding: 0 15px;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background-color: #f0f0f2;
+    }
+    
+    &:focus {
+      border: 1px solid ${colorStyle.pointColor};
+    }
+    
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
       -webkit-appearance: none;
@@ -65,19 +88,20 @@ const Before = styled.form`
   .name {
     width: 10%;
     height: 100%;
-    background-color: #fff;
-    color: #000;
+    background-color: #f7f7f9;
+    color: #333;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 30px;
-    font-weight: 900;
-    border-radius: 0 20px 20px 0;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 0 10px 10px 0;
   }
 `;
+
 const After = styled.form`
-  width: 80%;
-  height: 5vw;
+  width: 100%;
+  height: 50px;
   margin-bottom: 20px;
   display: flex;
   select {
@@ -85,31 +109,44 @@ const After = styled.form`
     height: 100%;
     width: 30%;
     background-color: #f7f7f9;
-    border-right: 1px solid rgba(0, 0, 0, 0.3);
-    color: black;
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    color: #333;
     display: flex;
     align-items: center;
     padding-left: 20px;
     box-sizing: border-box;
-    font-size: 30px;
-    font-weight: 900;
-    border-radius: 20px 0 0 20px;
-    line-height: 105%;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 10px 0 0 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background-color: #f0f0f2;
+    }
+    
     option {
       font-size: 16px;
+      background-color: #fff;
     }
   }
   input {
     all: unset;
     width: 60%;
     height: 100%;
-    background-color: #fff;
-    color: black;
-    font-size: 40px;
-    font-weight: 900;
+    background-color: #f7f7f9;
+    color: #333;
+    font-size: 16px;
+    font-weight: 500;
     text-align: end;
     box-sizing: border-box;
-    padding-right: 10px;
+    padding: 0 15px;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background-color: #f0f0f2;
+    }
+    
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
       -webkit-appearance: none;
@@ -119,14 +156,14 @@ const After = styled.form`
   .name {
     width: 10%;
     height: 100%;
-    background-color: #fff;
-    color: #000;
+    background-color: #f7f7f9;
+    color: #333;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 30px;
-    font-weight: 900;
-    border-radius: 0 20px 20px 0;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 0 10px 10px 0;
   }
 `;
 
