@@ -7,25 +7,51 @@ import { AfterContext, BeforeContext, CountContext, SecContext } from "./ValueCo
 import { DateContext } from "./DateContext";
 
 const Container = styled.div`
-  position: relative;
-  z-index: 1;
-  width: 80%;
-  max-width: 800px;
-  margin: 0 auto;
+  width: 100%;
   padding: 0;
   background-color: #fff;
   border-radius: 0 0 20px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-height: calc(100vh - 250px);
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+  }
+
+  @media (max-width: 768px) {
+    border-radius: 0;
+  }
 `;
 
 const DayWrap = styled.div`
-  width: 100%;
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
   padding: 20px;
   color: #333;
-  
+
+  @media (max-width: 768px) {
+    width: 95%;
+    padding: 15px;
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
+    padding: 10px;
+  }
+
   .today_wrap {
     padding: 15px;
     text-align: center;
@@ -34,6 +60,20 @@ const DayWrap = styled.div`
     background-color: #f7f7f9;
     border-radius: 10px;
     margin-bottom: 20px;
+
+    @media (max-width: 768px) {
+      font-size: 20px;
+      line-height: 30px;
+      padding: 12px;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 16px;
+      line-height: 24px;
+      padding: 10px;
+      margin-bottom: 15px;
+    }
+
     span {
       color: ${colorStyle.pointColor};
       font-weight: 500;
@@ -46,6 +86,14 @@ const DayWrap = styled.div`
     background-color: #f7f7f9;
     border-radius: 10px;
 
+    @media (max-width: 768px) {
+      padding: 15px;
+    }
+
+    @media (max-width: 480px) {
+      padding: 10px;
+    }
+
     .what_days {
       display: flex;
       align-items: center;
@@ -53,13 +101,22 @@ const DayWrap = styled.div`
       padding: 15px;
       border-bottom: 1px solid rgba(0, 0, 0, 0.1);
       margin-bottom: 15px;
-      
+
+      @media (max-width: 768px) {
+        padding: 12px;
+      }
+
+      @media (max-width: 480px) {
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+
       .date {
         display: flex;
         align-items: center;
         justify-content: space-between;
         width: 48%;
-        
+
         form {
           width: 95%;
           input {
@@ -73,11 +130,11 @@ const DayWrap = styled.div`
             padding: 0 15px;
             border-radius: 10px;
             transition: all 0.3s ease;
-            
+
             &:hover {
               background-color: #f8f9fa;
             }
-            
+
             &:focus {
               border: 1px solid ${colorStyle.pointColor};
             }
@@ -102,7 +159,7 @@ const DayWrap = styled.div`
           margin-left: 10px;
         }
       }
-      
+
       .days {
         width: 48%;
         font-size: 16px;
@@ -121,24 +178,33 @@ const DayWrap = styled.div`
       justify-content: space-between;
       border-bottom: 1px solid rgba(0, 0, 0, 0.1);
       margin-bottom: 15px;
-      
+
+      @media (max-width: 768px) {
+        padding: 12px;
+      }
+
+      @media (max-width: 480px) {
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+
       .days {
         display: flex;
         align-items: center;
         justify-content: space-between;
         width: 48%;
-        
+
         .days_contents {
           width: 82%;
           display: flex;
           align-items: center;
           justify-content: space-between;
-          
+
           form {
             width: 89%;
             display: flex;
             align-items: center;
-            
+
             input {
               all: unset;
               height: 50px;
@@ -150,11 +216,11 @@ const DayWrap = styled.div`
               border-radius: 10px;
               text-align: right;
               transition: all 0.3s ease;
-              
+
               &:hover {
                 background-color: #f8f9fa;
               }
-              
+
               &:focus {
                 border: 1px solid ${colorStyle.pointColor};
               }
@@ -166,7 +232,7 @@ const DayWrap = styled.div`
               }
             }
           }
-          
+
           div {
             font-size: 16px;
             color: #333;
@@ -182,7 +248,7 @@ const DayWrap = styled.div`
           display: flex;
           align-items: center;
           gap: 1px;
-          
+
           .before,
           .after {
             height: 50px;
@@ -195,25 +261,25 @@ const DayWrap = styled.div`
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
-            
+
             &:hover {
               background-color: #f8f9fa;
             }
           }
-          
+
           .before {
             border-radius: 10px 0 0 10px;
           }
-          
+
           .before.active {
             color: ${colorStyle.pointColor};
             font-weight: 500;
           }
-          
+
           .after {
             border-radius: 0 10px 10px 0;
           }
-          
+
           .after.active {
             color: ${colorStyle.pointColor};
             font-weight: 500;
@@ -244,9 +310,13 @@ const DayWrap = styled.div`
     font-size: 16px;
     color: #333;
     transition: all 0.3s ease;
-    
+
     &:hover {
       background-color: #f8f9fa;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 14px;
     }
   }
 `;

@@ -3,28 +3,165 @@ import styled from "styled-components";
 import { getExchangeRates } from "../api";
 import { colorStyle } from "../GlobalStyled";
 
-const Container = styled.div`
-  position: relative;
-  z-index: 1;
+const ExchangeWrapper = styled.div`
   width: 80%;
   max-width: 800px;
-  padding: 20px;
-  background-color: #f7f7f9;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin: 0 auto;
-  margin-top: 200px;
+
+  @media (max-width: 1280px) {
+    width: 90%;
+  }
+
+  @media (max-width: 768px) {
+    width: 95%;
+    padding: 20px;
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
+    padding: 15px;
+    border-radius: 0;
+  }
 `;
 
 const Contents = styled.div`
   width: 100%;
-  padding: 30px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 20px;
+
+  @media (max-width: 480px) {
+    gap: 15px;
+  }
+
+  .input_wrap {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    label {
+      font-size: 16px;
+      color: #333;
+      font-weight: 500;
+
+      @media (max-width: 480px) {
+        font-size: 14px;
+      }
+    }
+
+    input {
+      all: unset;
+      width: 100%;
+      height: 50px;
+      padding: 0 15px;
+      background-color: #f7f7f9;
+      border-radius: 10px;
+      font-size: 16px;
+      color: #333;
+      box-sizing: border-box;
+
+      @media (max-width: 480px) {
+        height: 45px;
+        padding: 0 10px;
+        font-size: 14px;
+      }
+    }
+  }
+
+  .select_wrap {
+    width: 100%;
+    display: flex;
+    gap: 20px;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    select {
+      all: unset;
+      flex: 1;
+      height: 50px;
+      padding: 0 15px;
+      background-color: #f7f7f9;
+      border-radius: 10px;
+      font-size: 16px;
+      color: #333;
+      cursor: pointer;
+
+      @media (max-width: 480px) {
+        height: 45px;
+        padding: 0 10px;
+        font-size: 14px;
+      }
+    }
+  }
+
+  .result_wrap {
+    width: 100%;
+    padding: 20px;
+    background-color: #f7f7f9;
+    border-radius: 10px;
+
+    @media (max-width: 768px) {
+      padding: 15px;
+    }
+
+    @media (max-width: 480px) {
+      padding: 10px;
+    }
+
+    p {
+      font-size: 18px;
+      color: #333;
+      text-align: center;
+      line-height: 1.5;
+
+      @media (max-width: 768px) {
+        font-size: 16px;
+      }
+
+      @media (max-width: 480px) {
+        font-size: 14px;
+      }
+
+      span {
+        color: ${colorStyle.pointColor};
+        font-weight: 500;
+      }
+    }
+  }
+
+  button {
+    all: unset;
+    width: 100%;
+    height: 50px;
+    background-color: ${colorStyle.pointColor};
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    box-sizing: border-box;
+
+    &:hover {
+      background-color: #e48c09;
+    }
+
+    @media (max-width: 480px) {
+      height: 45px;
+      font-size: 14px;
+    }
+  }
 `;
 
 const Before = styled.form`
@@ -73,10 +210,6 @@ const Before = styled.form`
     
     &:hover {
       background-color: #f0f0f2;
-    }
-    
-    &:focus {
-      border: 1px solid ${colorStyle.pointColor};
     }
     
     &::-webkit-outer-spin-button,
@@ -276,7 +409,7 @@ const Exchange = (): JSX.Element => {
   }, [wantValue, selectValue, exchangeValue]);
 
   return (
-    <Container>
+    <ExchangeWrapper>
       <Contents>
         <Before>
           <select ref={valueName} onChange={beChangeHandler}>
@@ -306,7 +439,7 @@ const Exchange = (): JSX.Element => {
           <div className="name">{exchangeValue}</div>
         </After>
       </Contents>
-    </Container>
+    </ExchangeWrapper>
   );
 };
 

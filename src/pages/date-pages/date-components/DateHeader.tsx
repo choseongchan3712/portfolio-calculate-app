@@ -5,85 +5,118 @@ import { DateContext } from "./DateContext";
 import { colorStyle } from "../../../GlobalStyled";
 
 const Container = styled.div`
-  margin: 0 auto;
-  width: 80%;
-  max-width: 800px;
-  margin-top: 200px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  width: 100%;
+  padding: 20px;
   background-color: #fff;
   border-radius: 20px 20px 0 0;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 
-  .date {
-    padding: 20px;
-    width: 100%;
+  @media (max-width: 768px) {
+    padding: 15px;
+    border-radius: 0;
+  }
+
+  @media (max-width: 480px) {
+    padding: 10px;
+    gap: 15px;
+  }
+`;
+
+const DateInput = styled.div`
+  width: 100%;
+  display: flex;
+  gap: 20px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .input_wrap {
+    flex: 1;
     display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    
-    label {
-      color: #333;
-      padding-right: 20px;
-      font-size: 16px;
-      font-weight: 500;
+    flex-direction: column;
+    gap: 10px;
+
+    @media (max-width: 480px) {
+      gap: 8px;
     }
-    
-    #what_date {
-      position: relative;
-      outline: none;
-      border: none;
-      height: 50px;
-      width: 80%;
-      color: #333;
+
+    label {
       font-size: 16px;
-      background-color: #f7f7f9;
+      color: #333;
+      font-weight: 500;
+
+      @media (max-width: 480px) {
+        font-size: 14px;
+      }
+    }
+
+    input {
+      all: unset;
+      width: 100%;
+      height: 50px;
       padding: 0 15px;
+      background-color: #f7f7f9;
       border-radius: 10px;
-      transition: all 0.3s ease;
-      
-      &:hover {
-        background-color: #f8f9fa;
+      font-size: 16px;
+      color: #333;
+      box-sizing: border-box;
+
+      @media (max-width: 480px) {
+        height: 45px;
+        padding: 0 10px;
+        font-size: 14px;
       }
-      
-      &:focus {
-        border: 1px solid ${colorStyle.pointColor};
-      }
-      
+
       &::-webkit-calendar-picker-indicator {
         cursor: pointer;
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        opacity: 0;
-        top: 0;
-        left: 0;
       }
     }
   }
+`;
 
-  .navigation {
-    width: 100%;
-    padding: 15px;
+const ButtonWrap = styled.div`
+  width: 100%;
+  display: flex;
+  gap: 10px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+
+  a {
+    all: unset;
+    flex: 1;
+    height: 50px;
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    background-color: #f7f7f9;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    
-    a {
-      text-decoration: none;
-      color: #333;
-      font-size: 16px;
-      padding: 10px 20px;
-      border-radius: 10px;
-      transition: all 0.3s ease;
-      
+    justify-content: center;
+    background-color: ${colorStyle.pointColor};
+    color: white;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    text-decoration: none;
+
+    @media (max-width: 480px) {
+      height: 45px;
+      font-size: 14px;
+    }
+
+    &:hover {
+      background-color: #e48c09;
+    }
+
+    &:last-child {
+      background-color: #e9ecef;
+      color: #495057;
+
       &:hover {
-        background-color: #fff;
+        background-color: #dee2e6;
       }
     }
   }
@@ -104,17 +137,19 @@ const DateHeader = (): JSX.Element => {
 
   return (
     <Container>
-      <div className="date">
-        <label htmlFor="what_date">기준일</label>
-        <input type="date" id="what_date" ref={dateRef} value={date} onChange={dateHandler}/>
-      </div>
+      <DateInput>
+        <div className="input_wrap">
+          <label htmlFor="what_date">기준일</label>
+          <input type="date" id="what_date" ref={dateRef} value={date} onChange={dateHandler}/>
+        </div>
+      </DateInput>
 
-      <div className="navigation">
+      <ButtonWrap>
         <Link to={""}>일수</Link>
         <Link to={"week"}>주수</Link>
         <Link to={"month"}>월수</Link>
         <Link to={"d-day"}>디데이카운트</Link>
-      </div>
+      </ButtonWrap>
     </Container>
   );
 };

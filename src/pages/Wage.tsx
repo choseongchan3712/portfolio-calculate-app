@@ -8,6 +8,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
+import { colorStyle } from "../GlobalStyled";
 
 // # 근로소득금액 = 총급여 - 근로소득공제금액 - 비과세액
 
@@ -55,13 +56,28 @@ const WageWrapper = styled.div`
   background-color: #fff;
   border-radius: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 1280px) {
+    width: 90%;
+  }
+
+  @media (max-width: 768px) {
+    width: 95%;
+    padding: 20px;
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
+    padding: 15px;
+    border-radius: 0;
+  }
 `;
 
 const StyledForm = styled.form`
   .select_wrap {
     display: flex;
-    align-items: center;
     gap: 10px;
+    align-items: center;
     margin-bottom: 20px;
 
     select {
@@ -75,6 +91,12 @@ const StyledForm = styled.form`
       color: #000;
       display: flex;
       align-items: center;
+
+      @media (max-width: 480px) {
+        width: 100px;
+        padding: 0 10px;
+        font-size: 14px;
+      }
     }
 
     input {
@@ -86,18 +108,33 @@ const StyledForm = styled.form`
       padding: 0 15px;
       font-size: 16px;
       text-align: right;
+
+      @media (max-width: 480px) {
+        height: 45px;
+        padding: 0 10px;
+        font-size: 14px;
+      }
     }
 
     span {
       font-size: 16px;
       color: #333;
+
+      @media (max-width: 480px) {
+        font-size: 14px;
+      }
     }
   }
 
-  .family {
+  .insurance_wrap {
     display: flex;
     gap: 20px;
     margin-bottom: 20px;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: 15px;
+    }
 
     label {
       flex: 1;
@@ -115,6 +152,12 @@ const StyledForm = styled.form`
         padding: 0 15px;
         font-size: 16px;
         text-align: right;
+
+        @media (max-width: 480px) {
+          height: 45px;
+          padding: 0 10px;
+          font-size: 14px;
+        }
       }
     }
   }
@@ -139,6 +182,12 @@ const StyledForm = styled.form`
         font-size: 16px;
         text-align: right;
         box-sizing: border-box;
+
+        @media (max-width: 480px) {
+          height: 45px;
+          padding: 0 10px;
+          font-size: 14px;
+        }
       }
     }
   }
@@ -147,7 +196,7 @@ const StyledForm = styled.form`
     all: unset;
     width: 100%;
     height: 50px;
-    background-color: #007bff;
+    background-color: ${colorStyle.pointColor};
     color: white;
     text-align: center;
     border-radius: 10px;
@@ -157,7 +206,12 @@ const StyledForm = styled.form`
     box-sizing: border-box;
     
     &:hover {
-      background-color: #0056b3;
+      background-color: #e48c09;
+    }
+
+    @media (max-width: 480px) {
+      height: 45px;
+      font-size: 14px;
     }
   }
 `;
@@ -168,11 +222,24 @@ const ResultSection = styled.div`
   background-color: #f8f9fa;
   border-radius: 10px;
 
+  @media (max-width: 768px) {
+    padding: 15px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 10px;
+    margin-top: 20px;
+  }
+
   .result {
     display: flex;
     align-items: center;
     gap: 15px;
     margin-bottom: 15px;
+
+    @media (max-width: 480px) {
+      gap: 10px;
+    }
 
     select {
       all: unset;
@@ -185,6 +252,13 @@ const ResultSection = styled.div`
       color: #000;
       display: flex;
       align-items: center;
+
+      @media (max-width: 480px) {
+        width: 100px;
+        height: 45px;
+        padding: 0 10px;
+        font-size: 14px;
+      }
     }
 
     span {
@@ -193,6 +267,14 @@ const ResultSection = styled.div`
       font-weight: 600;
       color: #333;
       text-align: right;
+
+      @media (max-width: 768px) {
+        font-size: 16px;
+      }
+
+      @media (max-width: 480px) {
+        font-size: 14px;
+      }
     }
   }
 
@@ -211,6 +293,11 @@ const ResultSection = styled.div`
     
     &:hover {
       background-color: #dee2e6;
+    }
+
+    @media (max-width: 480px) {
+      height: 45px;
+      font-size: 14px;
     }
   }
 `;
@@ -577,7 +664,7 @@ const Wage = (): JSX.Element => {
         setResult(actual);
       } else if (selectRef?.current?.value === "주급") {
         setResult((parseFloat(actual) / 4)?.toString());
-      } else if (selectRef?.current?.value === "연봉봉") {
+      } else if (selectRef?.current?.value === "연봉") {
         setResult((parseFloat(actual) * 12)?.toString());
       }
     }
@@ -615,7 +702,7 @@ const Wage = (): JSX.Element => {
             />
             <span>원</span>
           </div>
-          <div className="family">
+          <div className="insurance_wrap">
             <label>
               가족 인원수(본인포함)
               <input
@@ -642,7 +729,9 @@ const Wage = (): JSX.Element => {
               />
             </label>
           </div>
-          <button>입력하기</button>
+          <div>
+            <button>입력하기</button>
+          </div>
         </StyledForm>
         <ResultSection>
           <div className="result">
@@ -653,7 +742,9 @@ const Wage = (): JSX.Element => {
             </select>
             <span>예상 실 수령액: {result}원</span>
           </div>
-          <button onClick={clickHandler}>초기화</button>
+          <div>
+            <button onClick={clickHandler}>초기화</button>
+          </div>
         </ResultSection>
       </WageWrapper>
     </Container>

@@ -7,12 +7,13 @@ import { evaluate } from "mathjs";
 import { colorStyle } from "../GlobalStyled";
 
 const Container = styled.div`
-  position: relative;
-  z-index: 1;
-  width: 80%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
   max-width: 800px;
   margin: 0 auto;
-  margin-top: 200px;
   padding: 20px;
   background-color: #fff;
   border-radius: 20px;
@@ -28,7 +29,38 @@ const Container = styled.div`
     "box30 box31 box32 box33 box34 box35 box36 box37 box38 box39"
     "box40 box41 box42 box43 box44 box45 box46 box46 box47 box48";
   gap: 10px;
-  
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    grid-template-areas:
+      "display display display display display"
+      "box0 box1 box2 box3 box4"
+      "box5 box6 box7 box8 box9"
+      "box10 box11 box12 box13 box14"
+      "box15 box16 box17 box18 box19"
+      "box20 box21 box22 box23 box24"
+      "box25 box26 box27 box28 box29"
+      "box30 box31 box32 box33 box34";
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    grid-template-areas:
+      "display display display display"
+      "box0 box1 box2 box3"
+      "box4 box5 box6 box7"
+      "box8 box9 box10 box11"
+      "box12 box13 box14 box15"
+      "box16 box17 box18 box19"
+      "box20 box21 box22 box23"
+      "box24 box25 box26 box27"
+      "box28 box29 box30 box31"
+      "box32 box33 box34 box35";
+    gap: 8px;
+  }
+
   .box6,
   .box7,
   .box8 {
@@ -40,7 +72,7 @@ const Container = styled.div`
       background-color: #f0f0f2;
     }
   }
-  
+
   .box16,
   .box17,
   .box18,
@@ -60,7 +92,7 @@ const Container = styled.div`
       background-color: #f0f0f2;
     }
   }
-  
+
   .box9,
   .box19,
   .box29,
