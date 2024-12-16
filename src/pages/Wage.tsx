@@ -308,10 +308,29 @@ const Wage = (): JSX.Element => {
   const [famNum, setFamNum] = useState<string>();
   const [childNum, setChildNum] = useState<string>();
   const [nonTax, setNonTax] = useState<string>();
-  const [result, setResult] = useState<string>();
+  const [result, setResult] = useState<string | null>(null);
   const [actual, setActual] = useState<string>();
   const [salary, setSalary] = useState<string>("");
   const selectRef = useRef<HTMLSelectElement | null>(null);
+  const [taxableIncome, setTaxableIncome] = useState<string>();
+  const [taxableAnnualSalary, setTaxableAnnualSalary] = useState<string>();
+  const [numberOfDeduction, setNumberOfDeduction] = useState<string>();
+  const [earnedIncomeDeductionCal, setEarnedIncomeDeductionCal] = useState<string>();
+  const [earnedIncomeDeduction, setEarnedIncomeDeduction] = useState<string>();
+  const [basicDeduction, setBasicDeduction] = useState<string>();
+  const [pensionDeduction, setPensionDeduction] = useState<string>();
+  const [specialIncomeDeduction, setSpecialIncomeDeduction] = useState<string>();
+  const [earnedIncome, setEarnedIncome] = useState<string>();
+  const [incomeTax, setIncomeTax] = useState<string>();
+  const [taxDeduction, settaxDeduction] = useState<string>();
+  const [childTaxCredit, setChildTaxCredit] = useState<string>();
+  const [finalIncomeTax, setFinalIncomeTax] = useState<string>();
+  const [localIncomeTax, setLocalIncomeTax] = useState<string>();
+  const [nationalPension, setNationalPension] = useState<string>();
+  const [healthInsurance, setHealthInsurance] = useState<string>();
+  const [careInsurance, setcareInsurance] = useState<string>();
+  const [employmentInsurance, setEmploymentInsurance] = useState<string>();
+  const [actualSalary, setActualSalary] = useState<string>();
 
   const {
     register,
@@ -349,183 +368,183 @@ const Wage = (): JSX.Element => {
     if (salary && famNum && childNum && nonTax) {
       const nonTaxableAmount: string = nonTax; //! 비과세액
 
-      const taxableIncome: string = (
+      setTaxableIncome((
         parseFloat(salary) - parseFloat(nonTaxableAmount)
-      ).toString(); //! 과세소득
+      ).toString()); //! 과세소득
 
-      const taxableAnnualSalary: string = (
-        parseFloat(taxableIncome) * 12
-      ).toString(); //! 과세연봉
+      setTaxableAnnualSalary((
+        parseFloat(taxableIncome!) * 12
+      ).toString()); //! 과세연봉
 
       const numberOfFamily: string = famNum; //! 가족수
 
       const numberOfChildren: string = childNum; //! 자녀수
 
-      const numberOfDeduction: string = (
+      setNumberOfDeduction((
         parseFloat(numberOfFamily) + parseFloat(numberOfChildren)
-      ).toString(); //! 공제대상자
+      ).toString()); //! 공제대상자
 
-      const earnedIncomeDeductionCal: string = (() => {
+      setEarnedIncomeDeductionCal((() => {
         if (
-          parseFloat(taxableAnnualSalary) <= 5000000 &&
-          parseFloat(taxableAnnualSalary) > 0
+          parseFloat(taxableAnnualSalary!) <= 5000000 &&
+          parseFloat(taxableAnnualSalary!) > 0
         ) {
-          return (parseFloat(taxableAnnualSalary) * 0.7).toString();
+          return (parseFloat(taxableAnnualSalary!) * 0.7).toString();
         } else if (
-          parseFloat(taxableAnnualSalary) > 5000000 &&
-          parseFloat(taxableAnnualSalary) <= 15000000
+          parseFloat(taxableAnnualSalary!) > 5000000 &&
+          parseFloat(taxableAnnualSalary!) <= 15000000
         ) {
           return (
             3500000 +
-            (parseFloat(taxableAnnualSalary) - 5000000) * 0.4
+            (parseFloat(taxableAnnualSalary!) - 5000000) * 0.4
           ).toString();
         } else if (
-          parseFloat(taxableAnnualSalary) > 15000000 &&
-          parseFloat(taxableAnnualSalary) <= 45000000
+          parseFloat(taxableAnnualSalary!) > 15000000 &&
+          parseFloat(taxableAnnualSalary!) <= 45000000
         ) {
           return (
             7500000 +
-            (parseFloat(taxableAnnualSalary) - 15000000) * 0.15
+            (parseFloat(taxableAnnualSalary!) - 15000000) * 0.15
           ).toString();
         } else if (
-          parseFloat(taxableAnnualSalary) > 45000000 &&
-          parseFloat(taxableAnnualSalary) <= 100000000
+          parseFloat(taxableAnnualSalary!) > 45000000 &&
+          parseFloat(taxableAnnualSalary!) <= 100000000
         ) {
           return (
             12000000 +
-            (parseFloat(taxableAnnualSalary) - 45000000) * 0.05
+            (parseFloat(taxableAnnualSalary!) - 45000000) * 0.05
           ).toString();
-        } else if (parseFloat(taxableAnnualSalary) > 100000000) {
+        } else if (parseFloat(taxableAnnualSalary!) > 100000000) {
           return (
             14750000 +
-            (parseFloat(taxableAnnualSalary) - 100000000) * 0.02
+            (parseFloat(taxableAnnualSalary!) - 100000000) * 0.02
           ).toString();
         } else {
           return "0";
         }
-      })(); //! 근로소득공제금액계산
+      })()); //! 근로소득공제금액계산
 
-      const earnedIncomeDeduction: string = (() => {
-        if (parseFloat(earnedIncomeDeductionCal) > 20000000) {
+      setEarnedIncomeDeduction((() => {
+        if (parseFloat(earnedIncomeDeductionCal!) > 20000000) {
           return (20000000 / 12).toString();
         } else if (
-          parseFloat(earnedIncomeDeductionCal) <= 20000000 &&
-          parseFloat(earnedIncomeDeductionCal) > 0
+          parseFloat(earnedIncomeDeductionCal!) <= 20000000 &&
+          parseFloat(earnedIncomeDeductionCal!) > 0
         ) {
-          return (parseFloat(earnedIncomeDeductionCal) / 12).toString();
+          return (parseFloat(earnedIncomeDeductionCal!) / 12).toString();
         } else {
           return "0";
         }
-      })(); //! 근로소득공제금액
+      })()); //! 근로소득공제금액
 
-      const basicDeduction: string = (
-        (parseFloat(numberOfDeduction) * 1500000) /
+      setBasicDeduction((
+        (parseFloat(numberOfDeduction!) * 1500000) /
         12
-      ).toString(); //! 기본공제
+      ).toString()); //! 기본공제
 
-      const pensionDeduction: string = (
-        parseFloat(taxableIncome) * 0.045
-      ).toString(); //! 연금공제
+      setPensionDeduction((
+        parseFloat(taxableIncome!) * 0.045
+      ).toString()); //! 연금공제
 
-      const specialIncomeDeduction: string = (() => {
-        if (parseFloat(taxableAnnualSalary) <= 30000000) {
-          if (parseFloat(numberOfDeduction) === 1) {
+      setSpecialIncomeDeduction((() => {
+        if (parseFloat(taxableAnnualSalary!) <= 30000000) {
+          if (parseFloat(numberOfDeduction!) === 1) {
             return (
-              (3100000 + parseFloat(taxableAnnualSalary) * 0.04) /
+              (3100000 + parseFloat(taxableAnnualSalary!) * 0.04) /
               12
             ).toString();
-          } else if (parseFloat(numberOfDeduction) === 2) {
+          } else if (parseFloat(numberOfDeduction!) === 2) {
             return (
-              (3600000 + parseFloat(taxableAnnualSalary) * 0.04) /
+              (3600000 + parseFloat(taxableAnnualSalary!) * 0.04) /
               12
             ).toString();
-          } else if (parseFloat(numberOfDeduction) >= 3) {
+          } else if (parseFloat(numberOfDeduction!) >= 3) {
             return (
-              (5000000 + parseFloat(taxableAnnualSalary) * 0.07) /
+              (5000000 + parseFloat(taxableAnnualSalary!) * 0.07) /
               12
             ).toString();
           } else {
             return "0";
           }
         } else if (
-          parseFloat(taxableAnnualSalary) > 30000000 &&
-          parseFloat(taxableAnnualSalary) <= 45000000
+          parseFloat(taxableAnnualSalary!) > 30000000 &&
+          parseFloat(taxableAnnualSalary!) <= 45000000
         ) {
-          if (parseFloat(numberOfDeduction) === 1) {
+          if (parseFloat(numberOfDeduction!) === 1) {
             return (
               (3100000 +
-                parseFloat(taxableAnnualSalary) * 0.04 -
-                (parseFloat(taxableAnnualSalary) - 30000000) * 0.05) /
+                parseFloat(taxableAnnualSalary!) * 0.04 -
+                (parseFloat(taxableAnnualSalary!) - 30000000) * 0.05) /
               12
             ).toString();
-          } else if (parseFloat(numberOfDeduction) === 2) {
+          } else if (parseFloat(numberOfDeduction!) === 2) {
             return (
               (3600000 +
-                parseFloat(taxableAnnualSalary) * 0.04 -
-                (parseFloat(taxableAnnualSalary) - 30000000) * 0.05) /
+                parseFloat(taxableAnnualSalary!) * 0.04 -
+                (parseFloat(taxableAnnualSalary!) - 30000000) * 0.05) /
               12
             ).toString();
-          } else if (parseFloat(numberOfDeduction) >= 3) {
-            return parseFloat(taxableAnnualSalary) > 40000000
+          } else if (parseFloat(numberOfDeduction!) >= 3) {
+            return parseFloat(taxableAnnualSalary!) > 40000000
               ? (
                   (5000000 +
-                    parseFloat(taxableAnnualSalary) * 0.07 -
-                    (parseFloat(taxableAnnualSalary) - 30000000) * 0.05 +
-                    (parseFloat(taxableAnnualSalary) - 40000000) * 0.04) /
+                    parseFloat(taxableAnnualSalary!) * 0.07 -
+                    (parseFloat(taxableAnnualSalary!) - 30000000) * 0.05 +
+                    (parseFloat(taxableAnnualSalary!) - 40000000) * 0.04) /
                   12
                 ).toString()
               : (
                   (5000000 +
-                    parseFloat(taxableAnnualSalary) * 0.07 -
-                    (parseFloat(taxableAnnualSalary) - 30000000) * 0.05) /
+                    parseFloat(taxableAnnualSalary!) * 0.07 -
+                    (parseFloat(taxableAnnualSalary!) - 30000000) * 0.05) /
                   12
                 ).toString();
           } else {
             return "0";
           }
         } else if (
-          parseFloat(taxableAnnualSalary) > 45000000 &&
-          parseFloat(taxableAnnualSalary) <= 70000000
+          parseFloat(taxableAnnualSalary!) > 45000000 &&
+          parseFloat(taxableAnnualSalary!) <= 70000000
         ) {
-          if (parseFloat(numberOfDeduction) === 1) {
+          if (parseFloat(numberOfDeduction!) === 1) {
             return (
-              (3100000 + parseFloat(taxableAnnualSalary) * 0.015) /
+              (3100000 + parseFloat(taxableAnnualSalary!) * 0.015) /
               12
             ).toString();
-          } else if (parseFloat(numberOfDeduction) === 2) {
+          } else if (parseFloat(numberOfDeduction!) === 2) {
             return (
-              (3600000 + parseFloat(taxableAnnualSalary) * 0.02) /
+              (3600000 + parseFloat(taxableAnnualSalary!) * 0.02) /
               12
             ).toString();
-          } else if (parseFloat(numberOfDeduction) >= 3) {
+          } else if (parseFloat(numberOfDeduction!) >= 3) {
             return (
               (5000000 +
-                parseFloat(taxableAnnualSalary) * 0.05 +
-                (parseFloat(taxableAnnualSalary) - 40000000) * 0.04) /
+                parseFloat(taxableAnnualSalary!) * 0.05 +
+                (parseFloat(taxableAnnualSalary!) - 40000000) * 0.04) /
               12
             ).toString();
           } else {
             return "0";
           }
         } else if (
-          parseFloat(taxableAnnualSalary) > 70000000 &&
-          parseFloat(taxableAnnualSalary) <= 120000000
+          parseFloat(taxableAnnualSalary!) > 70000000 &&
+          parseFloat(taxableAnnualSalary!) <= 120000000
         ) {
-          if (parseFloat(numberOfDeduction) === 1) {
+          if (parseFloat(numberOfDeduction!) === 1) {
             return (
-              (3100000 + parseFloat(taxableAnnualSalary) * 0.005) /
+              (3100000 + parseFloat(taxableAnnualSalary!) * 0.005) /
               12
             ).toString();
-          } else if (parseFloat(numberOfDeduction) === 2) {
+          } else if (parseFloat(numberOfDeduction!) === 2) {
             return (
-              (3600000 + parseFloat(taxableAnnualSalary) * 0.01) /
+              (3600000 + parseFloat(taxableAnnualSalary!) * 0.01) /
               12
             ).toString();
-          } else if (parseFloat(numberOfDeduction) >= 3) {
+          } else if (parseFloat(numberOfDeduction!) >= 3) {
             return (
               (5000000 +
-                parseFloat(taxableAnnualSalary) * 0.03 +
-                (parseFloat(taxableAnnualSalary) - 40000000) * 0.04) /
+                parseFloat(taxableAnnualSalary!) * 0.03 +
+                (parseFloat(taxableAnnualSalary!) - 40000000) * 0.04) /
               12
             ).toString();
           } else {
@@ -534,76 +553,76 @@ const Wage = (): JSX.Element => {
         } else {
           return "0";
         }
-      })(); //! 특별소득공제
+      })()); //! 특별소득공제
 
-      const earnedIncome: string = (
-        parseFloat(taxableIncome) -
-        parseFloat(earnedIncomeDeduction) -
-        parseFloat(basicDeduction) -
-        parseFloat(pensionDeduction) -
-        parseFloat(specialIncomeDeduction)
-      ).toString(); //! 근로소득
+      setEarnedIncome((
+        parseFloat(taxableIncome!) -
+        parseFloat(earnedIncomeDeduction!) -
+        parseFloat(basicDeduction!) -
+        parseFloat(pensionDeduction!) -
+        parseFloat(specialIncomeDeduction!)
+      ).toString()); //! 근로소득
 
-      const incomeTax: string = (() => {
+      setIncomeTax((() => {
         if (
-          parseFloat(earnedIncome) * 12 > 0 &&
-          parseFloat(earnedIncome) * 12 <= 14000000
+          parseFloat(earnedIncome!) * 12 > 0 &&
+          parseFloat(earnedIncome!) * 12 <= 14000000
         ) {
-          return (parseFloat(earnedIncome) * 0.06).toString();
+          return (parseFloat(earnedIncome!) * 0.06).toString();
         } else if (
-          parseFloat(earnedIncome) * 12 > 14000000 &&
-          parseFloat(earnedIncome) * 12 <= 50000000
+          parseFloat(earnedIncome!) * 12 > 14000000 &&
+          parseFloat(earnedIncome!) * 12 <= 50000000
         ) {
-          return (parseFloat(earnedIncome) * 0.15 - 1260000 / 12).toString();
+          return (parseFloat(earnedIncome!) * 0.15 - 1260000 / 12).toString();
         } else if (
-          parseFloat(earnedIncome) * 12 > 50000000 &&
-          parseFloat(earnedIncome) * 12 <= 88000000
+          parseFloat(earnedIncome!) * 12 > 50000000 &&
+          parseFloat(earnedIncome!) * 12 <= 88000000
         ) {
-          return (parseFloat(earnedIncome) * 0.24 - 5760000 / 12).toString();
+          return (parseFloat(earnedIncome!) * 0.24 - 5760000 / 12).toString();
         } else if (
-          parseFloat(earnedIncome) * 12 > 88000000 &&
-          parseFloat(earnedIncome) * 12 <= 150000000
+          parseFloat(earnedIncome!) * 12 > 88000000 &&
+          parseFloat(earnedIncome!) * 12 <= 150000000
         ) {
-          return (parseFloat(earnedIncome) * 0.35 - 15440000 / 12).toString();
+          return (parseFloat(earnedIncome!) * 0.35 - 15440000 / 12).toString();
         } else if (
-          parseFloat(earnedIncome) * 12 > 150000000 &&
-          parseFloat(earnedIncome) * 12 <= 300000000
+          parseFloat(earnedIncome!) * 12 > 150000000 &&
+          parseFloat(earnedIncome!) * 12 <= 300000000
         ) {
-          return (parseFloat(earnedIncome) * 0.38 - 19940000 / 12).toString();
+          return (parseFloat(earnedIncome!) * 0.38 - 19940000 / 12).toString();
         } else if (
-          parseFloat(earnedIncome) * 12 > 300000000 &&
-          parseFloat(earnedIncome) * 12 <= 500000000
+          parseFloat(earnedIncome!) * 12 > 300000000 &&
+          parseFloat(earnedIncome!) * 12 <= 500000000
         ) {
-          return (parseFloat(earnedIncome) * 0.4 - 25940000 / 12).toString();
+          return (parseFloat(earnedIncome!) * 0.4 - 25940000 / 12).toString();
         } else if (
-          parseFloat(earnedIncome) * 12 > 500000000 &&
-          parseFloat(earnedIncome) * 12 <= 1000000000
+          parseFloat(earnedIncome!) * 12 > 500000000 &&
+          parseFloat(earnedIncome!) * 12 <= 1000000000
         ) {
-          return (parseFloat(earnedIncome) * 0.42 - 35940000 / 12).toString();
-        } else if (parseFloat(earnedIncome) * 12 > 1000000000) {
-          return (parseFloat(earnedIncome) * 0.45 - 65940000 / 12).toString();
+          return (parseFloat(earnedIncome!) * 0.42 - 35940000 / 12).toString();
+        } else if (parseFloat(earnedIncome!) * 12 > 1000000000) {
+          return (parseFloat(earnedIncome!) * 0.45 - 65940000 / 12).toString();
         } else {
           return "0";
         }
-      })(); //! 소득세
+      })()); //! 소득세
 
-      const taxDeduction: string = (() => {
+      settaxDeduction((() => {
         if (
-          parseFloat(incomeTax) * 12 <= 1300000 &&
-          parseFloat(incomeTax) * 12 > 0
+          parseFloat(incomeTax!) * 12 <= 1300000 &&
+          parseFloat(incomeTax!) * 12 > 0
         ) {
-          return (parseFloat(incomeTax) * 0.55).toString();
-        } else if (parseFloat(incomeTax) * 12 > 1300000) {
+          return (parseFloat(incomeTax!) * 0.55).toString();
+        } else if (parseFloat(incomeTax!) * 12 > 1300000) {
           return (
-            (715000 + (parseFloat(incomeTax) * 12 - 1300000) * 0.55) /
+            (715000 + (parseFloat(incomeTax!) * 12 - 1300000) * 0.55) /
             12
           ).toString();
         } else {
           return "0";
         }
-      })(); //! 근로소득세액공제
+      })()); //! 근로소득세액공제
 
-      const childTaxCredit: string = (() => {
+      setChildTaxCredit((() => {
         if (parseFloat(numberOfChildren) === 1) {
           return (150000 / 12).toString();
         } else if (parseFloat(numberOfChildren) === 2) {
@@ -616,47 +635,75 @@ const Wage = (): JSX.Element => {
         } else {
           return "0";
         }
-      })(); //! 자녀세액공제
+      })()); //! 자녀세액공제
 
-      const finalIncomeTax: string = (
-        parseFloat(incomeTax) -
-        parseFloat(taxDeduction) -
-        parseFloat(childTaxCredit)
-      ).toString(); //! 최종소득세
+      setFinalIncomeTax((
+        parseFloat(incomeTax!) -
+        parseFloat(taxDeduction!) -
+        parseFloat(childTaxCredit!)
+      ).toString()); //! 최종소득세
 
-      const localIncomeTax: string = (
-        parseFloat(finalIncomeTax) * 0.1
-      ).toString(); //! 지방소득세
+      setLocalIncomeTax((
+        parseFloat(finalIncomeTax!) * 0.1
+      ).toString()); //! 지방소득세
 
-      const nationalPension: string = (
-        parseFloat(taxableIncome) * 0.045
-      ).toString(); //! 국민연금
+      setNationalPension((
+        parseFloat(taxableIncome!) * 0.045
+      ).toString()); //! 국민연금
 
-      const healthInsurance: string = (
-        parseFloat(taxableIncome) * 0.03545
-      ).toString(); //! 건강보험
+      setHealthInsurance((
+        parseFloat(taxableIncome!) * 0.03545
+      ).toString()); //! 건강보험
 
-      const careInsurance: string = (
-        parseFloat(healthInsurance) * 0.1281
-      ).toString(); //! 요양보험
+      setcareInsurance((
+        parseFloat(healthInsurance!) * 0.1281
+      ).toString()); //! 요양보험
 
-      const employmentInsurance: string = (
-        parseFloat(taxableIncome) * 0.009
-      ).toString(); //! 고용보험
+      setEmploymentInsurance((
+        parseFloat(taxableIncome!) * 0.009
+      ).toString()); //! 고용보험
 
-      const actualSalary: string = (
-        parseFloat(salary) -
-        parseFloat(finalIncomeTax) -
-        parseFloat(localIncomeTax) -
-        parseFloat(nationalPension) -
-        parseFloat(healthInsurance) -
-        parseFloat(careInsurance) -
-        parseFloat(employmentInsurance)
-      ).toString(); //! 실수령액
+      setActualSalary(() => {
+        const values = {
+          salary: parseFloat(salary || '0'),
+          finalIncomeTax: parseFloat(finalIncomeTax || '0'),
+          localIncomeTax: parseFloat(localIncomeTax || '0'),
+          nationalPension: parseFloat(nationalPension || '0'),
+          healthInsurance: parseFloat(healthInsurance || '0'),
+          careInsurance: parseFloat(careInsurance || '0'),
+          employmentInsurance: parseFloat(employmentInsurance || '0')
+        };
 
+        const result = values.salary -
+          values.finalIncomeTax -
+          values.localIncomeTax -
+          values.nationalPension -
+          values.healthInsurance -
+          values.careInsurance -
+          values.employmentInsurance;
+
+        return isNaN(result) ? '0' : result.toString();
+      }); //! 실수령액
+
+      console.log('Debug values:', {
+        salary,
+        finalIncomeTax,
+        localIncomeTax,
+        nationalPension,
+        healthInsurance,
+        careInsurance,
+        employmentInsurance
+      });
+    }
+  }, [salary, famNum, childNum, nonTax]);
+
+  useEffect(() => {
+    if (actualSalary) {
       setActual(actualSalary);
     }
-  }, [salary && famNum && childNum && nonTax]);
+  }, [actualSalary]);
+
+  console.log(actual);
 
   useEffect(() => {
     if (actual) {
@@ -684,6 +731,7 @@ const Wage = (): JSX.Element => {
 
   const clickHandler = () => {
     reset();
+    setResult(null);
   };
 
   return (
