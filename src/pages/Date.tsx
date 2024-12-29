@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import DateHeader from "./date-pages/date-components/DateHeader";
 import { Outlet } from "react-router-dom";
+import PageTitle from "../components/PageTitle";
 
 const Container = styled.div`
   width: 100%;
@@ -21,12 +22,15 @@ const Wrapper = styled.div`
 
 const Date = (): JSX.Element => {
   return (
-    <Container>
-      <Wrapper>
-        <DateHeader />
-        <Outlet />
-      </Wrapper>
-    </Container>
+    <>
+    <PageTitle title="날짜계산기"/>
+      <Container>
+        <Wrapper>
+          <DateHeader />
+          <Outlet />
+        </Wrapper>
+      </Container>
+    </>
   );
 };
 

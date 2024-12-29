@@ -15,6 +15,7 @@ import {
   SecProvider,
 } from "./pages/date-pages/date-components/ValueProvider";
 import Wage from "./pages/Wage";
+import PageNotFound from "./pages/PageNotFound";
 
 const Router = (): JSX.Element => {
   return (
@@ -35,6 +36,7 @@ const Router = (): JSX.Element => {
                     <Route path="d-day" element={<DDay />} />
                   </Route>
                   <Route path="/wage" element={<Wage />}/>
+                  <Route path="/*" element={<PageNotFound />} />
                 </Routes>
               </HashRouter>
             </CountProvider>

@@ -5,6 +5,7 @@ import Display from "./calculate-components/Display";
 import { useState } from "react";
 import { evaluate } from "mathjs";
 import { colorStyle } from "../GlobalStyled";
+import PageTitle from "../components/PageTitle";
 
 const Container = styled.div`
   position: absolute;
@@ -189,7 +190,7 @@ const Calculate = (): JSX.Element => {
       if (input.includes("nthRoot")) {
         const firstNum = (input: string) => input.replace("nthRoot", "");
         const first = firstNum(input);
-        setInput(Math.pow(Number(first), 1 / Number(value)).toString())
+        setInput(Math.pow(Number(first), 1 / Number(value)).toString());
         console.log(input);
       } else {
         setInput((prev) => prev + value);
@@ -212,18 +213,21 @@ const Calculate = (): JSX.Element => {
   };
 
   return (
-    <Container>
-      <Display value={result || input} />
-      {/*  */}
-      {buttonList.map((data, index) => (
-        <Button
-          key={index}
-          label={data}
-          onClick={() => clickHandler(data)}
-          num={"box" + String(index)}
-        />
-      ))}
-    </Container>
+    <>
+    <PageTitle title="공학계산기"/>
+      <Container>
+        <Display value={result || input} />
+        {/*  */}
+        {buttonList.map((data, index) => (
+          <Button
+            key={index}
+            label={data}
+            onClick={() => clickHandler(data)}
+            num={"box" + String(index)}
+          />
+        ))}
+      </Container>
+    </>
   );
 };
 

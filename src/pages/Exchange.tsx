@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { getExchangeRates } from "../api";
 import { colorStyle } from "../GlobalStyled";
+import PageTitle from "../components/PageTitle";
 
 const ExchangeWrapper = styled.div`
   width: 80%;
@@ -185,11 +186,11 @@ const Before = styled.form`
     border-radius: 10px 0 0 10px;
     cursor: pointer;
     transition: all 0.3s ease;
-    
+
     &:hover {
       background-color: #f0f0f2;
     }
-    
+
     option {
       font-size: 16px;
       background-color: #fff;
@@ -207,11 +208,11 @@ const Before = styled.form`
     box-sizing: border-box;
     padding: 0 15px;
     transition: all 0.3s ease;
-    
+
     &:hover {
       background-color: #f0f0f2;
     }
-    
+
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
       -webkit-appearance: none;
@@ -253,11 +254,11 @@ const After = styled.form`
     border-radius: 10px 0 0 10px;
     cursor: pointer;
     transition: all 0.3s ease;
-    
+
     &:hover {
       background-color: #f0f0f2;
     }
-    
+
     option {
       font-size: 16px;
       background-color: #fff;
@@ -275,11 +276,11 @@ const After = styled.form`
     box-sizing: border-box;
     padding: 0 15px;
     transition: all 0.3s ease;
-    
+
     &:hover {
       background-color: #f0f0f2;
     }
-    
+
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
       -webkit-appearance: none;
@@ -409,37 +410,40 @@ const Exchange = (): JSX.Element => {
   }, [wantValue, selectValue, exchangeValue]);
 
   return (
-    <ExchangeWrapper>
-      <Contents>
-        <Before>
-          <select ref={valueName} onChange={beChangeHandler}>
-            <option value="USD">미국</option>
-            <option value="KRW">한국</option>
-            <option value="CNY">중국</option>
-            <option value="JPY">일본</option>
-            <option value="EUR">유로</option>
-          </select>
-          <input
-            type="number"
-            ref={wantRef}
-            onChange={doExchangeCal}
-            placeholder="0"
-          />
-          <div className="name">{selectValue}</div>
-        </Before>
-        <After>
-          <select ref={exchangeName} onChange={aftChangeHandler}>
-            <option value="KRW">한국</option>
-            <option value="USD">미국</option>
-            <option value="CNY">중국</option>
-            <option value="JPY">일본</option>
-            <option value="EUR">유로</option>
-          </select>
-          <input type="number" ref={doRef} value={doValue} readOnly />
-          <div className="name">{exchangeValue}</div>
-        </After>
-      </Contents>
-    </ExchangeWrapper>
+    <>
+    <PageTitle title="환율계산기"/>
+      <ExchangeWrapper>
+        <Contents>
+          <Before>
+            <select ref={valueName} onChange={beChangeHandler}>
+              <option value="USD">미국</option>
+              <option value="KRW">한국</option>
+              <option value="CNY">중국</option>
+              <option value="JPY">일본</option>
+              <option value="EUR">유로</option>
+            </select>
+            <input
+              type="number"
+              ref={wantRef}
+              onChange={doExchangeCal}
+              placeholder="0"
+            />
+            <div className="name">{selectValue}</div>
+          </Before>
+          <After>
+            <select ref={exchangeName} onChange={aftChangeHandler}>
+              <option value="KRW">한국</option>
+              <option value="USD">미국</option>
+              <option value="CNY">중국</option>
+              <option value="JPY">일본</option>
+              <option value="EUR">유로</option>
+            </select>
+            <input type="number" ref={doRef} value={doValue} readOnly />
+            <div className="name">{exchangeValue}</div>
+          </After>
+        </Contents>
+      </ExchangeWrapper>
+    </>
   );
 };
 
